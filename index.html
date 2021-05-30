@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>To Do List</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap" rel="stylesheet">
+	<style type="text/css">
+		.content{
+			max-width: 400px;
+			max-height: 600px;
+			margin: auto;
+			background: #BCECE0;
+			height: 450px;
+			padding: 2%;
+			border:1px solid;
+		}
+		.content h1{
+			text-align: center;
+
+		}
+		input[type=text]{
+			width: 80%;
+			height: 30px;
+			margin-bottom: 10px;
+		}
+		input[type=button]{
+			border: none;
+			width: 17%;
+			float: right;
+			height: 35px;
+      background-color:#F652A0;
+		}
+		button:hover, input[type=button]:hover{
+			background: #ccc;
+		}
+
+		button, input[type=button]{ cursor: pointer; }
+
+		button{
+			float: right;
+			width: 25px;
+			padding: 5px;
+      background-color:#F652A0;
+		}
+		ul{
+			list-style-type: none;
+			padding: 10px;
+			height: 250px;
+			background: #fff;
+			overflow-y: auto;
+		}
+		li{
+			height: 40px;
+			margin: 15px 0 15px 0;
+			border-bottom: 1px solid;
+		}
+
+    h1{
+      font-family: 'Poppins', sans-serif;
+      font-size: 40px;
+      color:#4C5270 ;
+    }
+    label{
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      color:#4C5270;
+    }
+
+
+	</style>
+	
+</head>
+<body>
+
+	<div class='content'>
+		
+
+			<div class="row">
+					
+					<div class="col-12">
+						<h1> TO DO LIST </h1>
+						<form>
+
+							<input type="text" name="task" id='task' placeholder="Novo Item..." />
+							<input type="button" name="" 
+									onclick="addTask();" 
+									value="Adicionar"/>
+
+						</form>
+
+					</div>
+
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+				
+					<div class="to-do-list-box">
+					
+						<label>MY LIST</label>
+						<ul id="myList">	
+
+						</ul>
+
+
+					</div>
+
+				</div>
+			</div>
+
+	</div>
+
+
+<script type="text/javascript">
+	
+	var ul = document.getElementById("myList");
+	var li;
+	var itemId;
+	var item;
+	addTask	= function (){
+		
+		if(document.getElementById("task").value != ""){
+
+			item   = document.getElementById("task");
+
+			itemId = ul.childElementCount;
+
+			li 	   = createItemEl(item.value,itemId);
+			li.appendChild(createRemoveTaskBtn(itemId));
+			ul.appendChild(li);
+			item.value = "";
+		}
+
+	}
+
+	removeTask = function( itemId ){
+
+		for( i = 0 ; i < ul.children.length ; i++){
+
+			if(ul.children[i].getAttribute("index") == itemId ){
+
+				ul.children[i].remove();
+
+			}
+		}
+	}
+
+	createItemEl = function(itemValue, itemId){
+
+		let li = document.createElement("li");
+
+		li.setAttribute("index", itemId);
+
+		li.appendChild(document.createTextNode(itemValue));
+
+		return li;
+	}
+	
+	createRemoveTaskBtn = function(itemId){
+		let btn =  document.createElement("button");
+		btn.setAttribute("onclick", "removeTask("+itemId+")"); 
+		btn.innerHTML ="X";
+		return btn;
+	}
+
+
+	
+</script>
+
+</body>
+</html>
